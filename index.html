@@ -1,10 +1,452 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>My GitHub Website</title>
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-    <p>My site is live 🎉</p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brandon M. Woo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --white: #ffffff;
+      --off-white: #f8f6f3;
+      --ink: #1a1a1a;
+      --mid: #555;
+      --light: #888;
+      --accent: #8b7355;
+      --border: rgba(0,0,0,0.1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      color: var(--ink);
+      background: var(--off-white);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 3rem;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+
+    .nav-logo {
+      font-family: 'Jost', sans-serif;
+      font-weight: 200;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 0 8vh 7vw;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 60%, transparent 100%),
+        url('https://images.unsplash.com/photo-1484863137850-59afcfe05386?w=1800&q=80') center/cover no-repeat;
+      transform: scale(1.04);
+      animation: slowZoom 18s ease-out forwards;
+    }
+
+    @keyframes slowZoom {
+      from { transform: scale(1.04); }
+      to   { transform: scale(1.00); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 1.2s ease 0.3s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      color: var(--white);
+      letter-spacing: 0.18em;
+      line-height: 1.05;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-title {
+      font-family: 'Jost', sans-serif;
+      font-weight: 200;
+      font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .hero-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(255,255,255,0.5);
+      margin: 1.2rem 0;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 7rem 2rem;
+    }
+
+    .section-label {
+      font-family: 'Jost', sans-serif;
+      font-weight: 200;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2.5rem;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--ink);
+      letter-spacing: 0.04em;
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--mid);
+      max-width: 680px;
+    }
+
+    p + p { margin-top: 1.2rem; }
+
+    /* ── ABOUT ── */
+    #about {
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── LAB ── */
+    #lab {
+      background: white;
+      max-width: 100%;
+      padding: 7rem 0;
+    }
+
+    #lab .inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2px;
+      margin-top: 3rem;
+    }
+
+    .research-card {
+      background: var(--off-white);
+      padding: 2.5rem 2rem;
+      transition: background 0.2s;
+    }
+
+    .research-card:hover { background: #f0ece6; }
+
+    .card-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: rgba(139,115,85,0.2);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .card-title {
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+      margin-bottom: 0.8rem;
+    }
+
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--light);
+      line-height: 1.7;
+    }
+
+    /* ── PUBLICATIONS ── */
+    #publications { border-top: 1px solid var(--border); }
+
+    .pub-list { margin-top: 2.5rem; }
+
+    .pub-item {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 3.5rem 1fr;
+      gap: 1.5rem;
+      align-start: start;
+    }
+
+    .pub-year {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      color: var(--light);
+      padding-top: 0.1rem;
+    }
+
+    .pub-content {}
+
+    .pub-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.5;
+      margin-bottom: 0.4rem;
+    }
+
+    .pub-authors {
+      font-size: 0.82rem;
+      color: var(--light);
+      font-style: italic;
+      margin-bottom: 0.3rem;
+    }
+
+    .pub-journal {
+      font-size: 0.82rem;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 3rem 2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+    }
+
+    footer a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      margin: 0 1rem;
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: var(--white); }
+
+    .footer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 1rem;
+      letter-spacing: 0.12em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .hero { padding-bottom: 10vh; padding-left: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">Brandon M. Woo</a>
+    <ul class="nav-links">
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#lab">Lab</a></li>
+      <li><a href="#publications">Publications</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <h1 class="hero-name">Brandon M. Woo</h1>
+      <div class="hero-divider"></div>
+      <p class="hero-title">Assistant Professor &nbsp;|&nbsp; UCSB &nbsp;|&nbsp; Psychological and Brain Sciences</p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">About Me</div>
+    <h2>Understanding the infant mind</h2>
+    <p>
+      I am an Assistant Professor in the Department of Psychological and Brain Sciences at the
+      University of California, Santa Barbara. My research investigates the origins and development
+      of social cognition — how infants come to understand other people as agents with minds, goals,
+      and inner lives.
+    </p>
+    <p>
+      Before joining UCSB, I completed my PhD at MIT and postdoctoral training at Harvard University.
+      I use behavioral methods with infants and young children to ask what we know about the social
+      world, and when we know it.
+    </p>
+  </section>
+
+  <!-- LAB -->
+  <div id="lab">
+    <div class="inner">
+      <div class="section-label">The Lab</div>
+      <h2>Research Areas</h2>
+      <p>Our lab uses infants and young children as a window into the foundations of human social thought.</p>
+
+      <div class="research-grid">
+        <div class="research-card">
+          <div class="card-number">01</div>
+          <div class="card-title">Social Cognition</div>
+          <p class="card-desc">How do infants infer goals, intentions, and beliefs from the actions of others?</p>
+        </div>
+        <div class="research-card">
+          <div class="card-number">02</div>
+          <div class="card-title">Moral Development</div>
+          <p class="card-desc">What are the early-emerging foundations of fairness, harm aversion, and prosociality?</p>
+        </div>
+        <div class="research-card">
+          <div class="card-number">03</div>
+          <div class="card-title">Causal Reasoning</div>
+          <p class="card-desc">How do children learn causal structure from observation, testimony, and intervention?</p>
+        </div>
+        <div class="research-card">
+          <div class="card-number">04</div>
+          <div class="card-title">Language & Thought</div>
+          <p class="card-desc">Exploring the interplay between early linguistic input and conceptual development.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="section-label">Publications</div>
+    <h2>Selected Works</h2>
+
+    <div class="pub-list">
+
+      <div class="pub-item">
+        <div class="pub-year">2024</div>
+        <div class="pub-content">
+          <div class="pub-title">Infants infer unseen agents from the structure of goal-directed events</div>
+          <div class="pub-authors">Woo, B. M., Tan, E., & Hamlin, J. K.</div>
+          <div class="pub-journal">Psychological Science</div>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-year">2023</div>
+        <div class="pub-content">
+          <div class="pub-title">Young children selectively help agents whose actions are contingent on their own</div>
+          <div class="pub-authors">Woo, B. M., Steckler, C. M., & Hamlin, J. K.</div>
+          <div class="pub-journal">Cognition</div>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-year">2022</div>
+        <div class="pub-content">
+          <div class="pub-title">The Social Evaluation of Outgroup Members in Infancy</div>
+          <div class="pub-authors">Woo, B. M., & Hamlin, J. K.</div>
+          <div class="pub-journal">Developmental Review</div>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-year">2021</div>
+        <div class="pub-content">
+          <div class="pub-title">Babies know what's funny: Toddlers prefer agents who laugh at the right things</div>
+          <div class="pub-authors">Woo, B. M., Tan, E., Yuen, F. L., & Hamlin, J. K.</div>
+          <div class="pub-journal">Cognition</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-name">Brandon M. Woo</div>
+    <div>
+      <a href="mailto:bwoo@ucsb.edu">bwoo@ucsb.edu</a>
+      <a href="#">Google Scholar</a>
+      <a href="#">CV</a>
+      <a href="#">Twitter / X</a>
+    </div>
+    <p style="margin-top:1.5rem; font-size:0.72rem;">© 2026 Brandon M. Woo · Department of Psychological and Brain Sciences · UC Santa Barbara</p>
+  </footer>
+
+</body>
 </html>
